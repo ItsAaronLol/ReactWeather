@@ -1,4 +1,5 @@
 var React = require('react');
+var {Link} = require('react-router');
 
 // var About = React.createClass({
 //   render: function(){
@@ -19,8 +20,13 @@ var React = require('react');
 var About = (props) => {
   return (
     <div>
-      <h1>About</h1>
-      <p>Welcome to the About Page</p>
+      <h1 className = 'text-center'>About Component</h1>
+      <p>About:</p>
+      <ul>
+        <li>
+          <a href="https://facebook.github.io/react">React</a>
+        </li>
+      </ul>
     </div>
 
   )
