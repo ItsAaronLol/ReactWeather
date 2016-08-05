@@ -13,7 +13,13 @@ var Weather = React.createClass({
   },
   handleSearch: function(location){
     var that = this;
-    this.setState({isLoading: true});
+
+    this.setState({
+      isLoading: true,
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined
+    });
 
     openWeatherMap.getTemp(location).then(function(temp){
       that.setState({
@@ -29,16 +35,29 @@ var Weather = React.createClass({
         });
       alert(errorMessage);
     });
-    // this.setState({
-    //   location: location,
-    //   temp: 23
-    // });
   },
+
+  componentDidMount: function(){ //called after everything is rendered
+    //when you use react-router, you get access to a ton of props
+    //some of them being the query strings
+    var location = this.props.location.query.location;
+    if(location && location.length > 0){
+      this.handleSearch(location);
+      window.location.hash = '#/';
+    }
+  },
+  componentWillReceiveProps: function(newProps){ //called anytime the component's props get updated
+    var location = newProps.location.query.location;
+    if(location && location.length > 0){
+      this.handleSearch(location);
+      window.location.hash = '#/';
+    }
+  },
+  //called everytime setState is called
   render: function(){
     // var location = this.state.location;
     // var temp = this.state.temp;
     var {isLoading, location, temp, errorMessage} = this.state;
-
     function renderMessage(){
       if(isLoading){
         return <h3 className = "text-center">Fetching weather...</h3>
