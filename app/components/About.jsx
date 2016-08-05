@@ -18,7 +18,11 @@ var React = require('react');
 //if you only need to render something (stateless)
 var About = (props) => {
   return (
-     <h1>About Component</h1>
+    <div>
+      <h1>About</h1>
+      <p>Welcome to the About Page</p>
+    </div>
+
   )
 };
 
